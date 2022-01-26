@@ -16,6 +16,9 @@ contract MyEpicNFT is ERC721URIStorage {
 
     using Counters for Counters.Counter;
 
+    //number of NFTs in the collection
+    uint32 maxNumbeOfNFTs = 10;
+
     // unique identifier for NFTs
     Counters.Counter private _tokenIds; 
 
@@ -59,6 +62,8 @@ contract MyEpicNFT is ERC721URIStorage {
 
     function makeAnEpicNFT() public {
         uint256 newItemId = _tokenIds.current();
+
+        require(newItemId < maxNumbeOfNFTs, "All NFTs are minted");
 
         string memory first = pickRandomFirstWord(newItemId);
         string memory second = pickRandomSecondWord(newItemId);
